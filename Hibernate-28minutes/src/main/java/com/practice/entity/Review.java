@@ -3,6 +3,7 @@ package com.practice.entity;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.Id;
+import jakarta.persistence.ManyToOne;
 import jakarta.persistence.NamedQueries;
 import jakarta.persistence.NamedQuery;
 import jakarta.persistence.Table;
@@ -15,6 +16,9 @@ public class Review {
 	private Long id;
 	private String rating;
 	private String description;
+	
+	@ManyToOne    //anythingToOne is eager fetching
+	private Course course;
 	
 	public Review() {
 		
@@ -39,6 +43,14 @@ public class Review {
 
 	public void setRating(String rating) {
 		this.rating = rating;
+	}
+
+	public Course getCourse() {
+		return course;
+	}
+
+	public void setCourse(Course course) {
+		this.course = course;
 	}
 
 	@Override

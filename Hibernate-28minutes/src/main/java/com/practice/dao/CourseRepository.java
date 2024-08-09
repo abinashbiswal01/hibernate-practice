@@ -3,6 +3,7 @@ package com.practice.dao;
 import java.util.List;
 
 import com.practice.entity.Course;
+import com.practice.entity.Review;
 
 public interface CourseRepository {
 
@@ -16,6 +17,8 @@ public interface CourseRepository {
 	List<Course> nativeQueryBasic();
 	List<Course> nativeQueryParameters();
 	List<Course> nativeQueryNamedParameters();
+	
+	void addReviewsForCourse(Long id,List<Review> reviews);
 	
 	
 	

@@ -1,5 +1,6 @@
 package com.practice;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import org.slf4j.Logger;
@@ -13,6 +14,7 @@ import com.practice.dao.CourseRepository;
 import com.practice.dao.StudentRepository;
 import com.practice.entity.Course;
 import com.practice.entity.Passport;
+import com.practice.entity.Review;
 import com.practice.entity.Student;
 
 import jakarta.transaction.Transactional;
@@ -35,6 +37,18 @@ public class Hibernate28minutesApplication implements CommandLineRunner {
 	@Override
 	@Transactional
 	public void run(String... args) throws Exception {
+
+		logger.info(null);
+		//courseRepository.addReviewsForCourse(1001L);
+		List<Review> list= new ArrayList<>();
+		Review review1= new Review("Good, but outdated","3");
+		Review review2= new Review("no latest information","2");
+		list.add(review1);
+		list.add(review2);
+		courseRepository.addReviewsForCourse(1002L, list);
+	}
+	
+	private void dontCall() {
 //		repository.findById(1L);
 //		logger.info(null);
 		//courseRepository.playWithEntityManager();
@@ -59,9 +73,9 @@ public class Hibernate28minutesApplication implements CommandLineRunner {
 //		logger.info("Retrieved Student wwith id=2001 is : "+s);
 //		logger.info("His passport details are: "+s.getPassport());
 		
-		Passport p=studentRepository.retievePassportbyId(4001L);
-		logger.info("Retrieved Passpor with id=2001 is : "+p);
-		logger.info("Associated Student details are: "+p.getStudent());
+//		Passport p=studentRepository.retievePassportbyId(4001L);
+//		logger.info("Retrieved Passpor with id=2001 is : "+p);
+//		logger.info("Associated Student details are: "+p.getStudent());
 		
 	}
 

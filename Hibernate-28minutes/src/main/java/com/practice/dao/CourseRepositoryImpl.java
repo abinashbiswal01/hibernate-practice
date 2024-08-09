@@ -6,7 +6,9 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
 import com.practice.entity.Course;
+import com.practice.entity.Review;
 
+import ch.qos.logback.classic.Logger;
 import jakarta.persistence.EntityManager;
 import jakarta.persistence.Query;
 import jakarta.persistence.TypedQuery;
@@ -87,6 +89,48 @@ public class CourseRepositoryImpl implements CourseRepository {
 		query.setParameter("id", 202L);
 		return query.getResultList();
 	}
+
+	@Override
+	@Transactional
+	/*public void addReviewsForCourse(Long id) {
+		//get the course
+		Course course= em.find(Course.class, id);
+		System.out.println(course.getReviews());
+		Review review1= new Review("Not good","2");
+		Review review2= new Review("Poor English,cannot understand","1");
+		
+		
+		//SETTING THE RELATIONSHIP
+		//add two reviews in the course 
+		//and add the course detail in each review object
+		course.addReview(review1);
+		review1.setCourse(course);
+		
+		course.addReview(review2);
+		review2.setCourse(course);
+		
+		//save it to the DB
+		em.persist(review1);
+		em.persist(review2);
+		
+	}*/
+	
+	public void addReviewsForCourse(Long id,List<Review> reviews) {
+		//get the course
+		Course course= em.find(Course.class, id);
+		System.out.println(course.getReviews());
+		
+		for(Review review:reviews) {
+			
+			//setting the relationship
+			course.addReview(review);
+			review.setCourse(course);
+		
+			em.persist(review);
+		}
+	}
+	
+	
 	
 
 }
